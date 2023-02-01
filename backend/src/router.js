@@ -17,7 +17,7 @@ const memberControllers = require("./controllers/memberControllers");
 // Add all routes
 
 // PUBLIC ROUTES
-router.post("/api/register", hashPassword, userControllers.createUser);
+router.post("/register", hashPassword, userControllers.createUser);
 router.post(
   "/login",
   authControllers.getUserByEmailWithPasswordAndPassToNext,
