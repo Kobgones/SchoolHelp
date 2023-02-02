@@ -67,9 +67,10 @@ export default function Home() {
     })
       /* then I get the response to json. If response == 401 console log error else .then result
        */
+      // eslint-disable-next-line consistent-return
       .then((response) => {
         if (response.status !== 401) {
-          /* eslint consistent-return: off */ return response.json();
+          return response.json();
         }
         notifyError();
         setPassword("");

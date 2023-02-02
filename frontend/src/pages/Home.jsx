@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext } from "react";
-
 import CurrentUserContext from "../contexts/userContext";
 
 const { VITE_BACKEND_URL } = import.meta.env;
@@ -41,15 +40,22 @@ function Home() {
         </h1>
       </div>
       <div>
-        <div className="md:grid md:grid-cols-2 md:grid-rows-3">
+        <div className="md:grid md:grid-cols-2 md:gap-2 flex flex-col justify-center items-center w-full h-full">
           {clubs.map((club) => (
             <div
               key={club.id}
-              className="flex flex-col box justify-center items-center border-2 shadow-md w-1/3 py-10 my-10 hover:scale-110 hover:duration-100"
+              className="flex flex-col box justify-center items-center border-10 shadow-lg  w-2/3 py-10 my-10 hover:scale-110 hover:duration-100"
             >
-              <h3 className="text-mainBlue pb-10 underline">{club.name}</h3>
+              <h3 className="text-mainBlue pb-10 underline font-serif">
+                {club.name}
+              </h3>
               <h3 className="text-mainBlue pb-10">{club.sport}</h3>
-              <img src={club.picture} alt={club.name} />
+              <img
+                src={club.picture}
+                alt={club.name}
+                height={200}
+                width={200}
+              />
               <h4 className="text-mainBlue pb-10">
                 Coach / Responsable:{" "}
                 <span className="font-bold">{club.trainer}</span>

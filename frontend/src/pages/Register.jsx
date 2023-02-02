@@ -3,6 +3,7 @@ import Lottie from "react-lottie";
 import { useNavigate } from "react-router-dom";
 import { toast, Toaster } from "react-hot-toast";
 import animationData from "../lotties/register.json";
+import PreviousButton from "../components/PreviousButton";
 
 const { VITE_BACKEND_URL } = import.meta.env;
 
@@ -125,6 +126,7 @@ function Register() {
   return (
     <>
       <Toaster position="top-center" reverseOrder />
+      <PreviousButton />
       <div className="flex flex-col justify-center items-center h-screen">
         <div className="pb-10">
           <div className="flex flex-col justify-center items-center rounded-full border-2 border-mainBlue bg-mainBlue overflow-hidden">
@@ -136,7 +138,6 @@ function Register() {
           className="w-screen flex flex-col justify-center items-center"
         >
           <div className="flex flex-col justify-center w-9/12 md:w-1/3 pb-5">
-            <img src="/src/assets/mail.png" alt="mailPicture" width={30} />
             <input
               type="firstname"
               id="floating_standard"
@@ -153,7 +154,6 @@ function Register() {
             </label>
           </div>
           <div className="flex flex-col justify-center w-9/12 md:w-1/3">
-            <img src="/src/assets/password.png" alt="mailPicture" width={30} />
             <input
               type="lastname"
               id="floating_standard"
@@ -170,7 +170,6 @@ function Register() {
             </label>
           </div>
           <div className="flex flex-col justify-center w-9/12 md:w-1/3 pb-5">
-            <img src="/src/assets/mail.png" alt="mailPicture" width={30} />
             <input
               type="email"
               id="floating_standard"
@@ -187,7 +186,6 @@ function Register() {
             </label>
           </div>
           <div className="flex flex-col justify-center w-9/12 md:w-1/3">
-            <img src="/src/assets/password.png" alt="mailPicture" width={30} />
             <input
               type="password"
               id="floating_standard"

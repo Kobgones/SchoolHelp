@@ -2,11 +2,7 @@ const express = require("express");
 
 const router = express.Router();
 
-const {
-  hashPassword,
-  verifyPassword,
-  verifyToken,
-} = require("./middlewares/auth");
+const { hashPassword, verifyPassword } = require("./middlewares/auth");
 
 // Add all controllers needed
 const userControllers = require("./controllers/userControllers");
@@ -25,9 +21,6 @@ router.post(
   authControllers.getUserByEmailWithPasswordAndPassToNext,
   verifyPassword
 );
-
-// PROTECTED ROUTES
-router.use(verifyToken); // From this point, the middleware verifyToken will be used at the beginning of all functions
 
 // USER ROUTES
 router.get("/api/users", userControllers.getAllUsers);

@@ -2,6 +2,7 @@ import { useState } from "react";
 import Lottie from "react-lottie";
 import { useNavigate } from "react-router-dom";
 import { toast, Toaster } from "react-hot-toast";
+import PreviousButton from "../components/PreviousButton";
 import animationData from "../lotties/create.json";
 
 const { VITE_BACKEND_URL } = import.meta.env;
@@ -122,6 +123,7 @@ function CreationClub() {
   return (
     <>
       <Toaster position="top-center" reverseOrder />
+      <PreviousButton />
       <div className="flex flex-col justify-center items-center h-screen">
         <div className="pb-10">
           <div className="flex flex-col justify-center items-center rounded-full border-2 border-mainBlue bg-mainBlue overflow-hidden">
@@ -133,7 +135,6 @@ function CreationClub() {
           className="w-screen flex flex-col justify-center items-center"
         >
           <div className="flex flex-col justify-center w-9/12 md:w-1/3 pb-5">
-            <img src="/src/assets/mail.png" alt="mailPicture" width={30} />
             <input
               type="nomDuClub"
               id="floating_standard"
@@ -150,7 +151,6 @@ function CreationClub() {
             </label>
           </div>
           <div className="flex flex-col justify-center w-9/12 md:w-1/3">
-            <img src="/src/assets/password.png" alt="mailPicture" width={30} />
             <textarea
               type="textarea"
               id="floating_standard"
@@ -167,7 +167,6 @@ function CreationClub() {
             </label>
           </div>
           <div className="flex flex-col justify-center w-9/12 md:w-1/3 pb-5">
-            <img src="/src/assets/mail.png" alt="mailPicture" width={30} />
             <input
               type="sport"
               id="floating_standard"
@@ -184,7 +183,6 @@ function CreationClub() {
             </label>
           </div>
           <div className="flex flex-col justify-center w-9/12 md:w-1/3">
-            <img src="/src/assets/password.png" alt="mailPicture" width={30} />
             <input
               type="trainer"
               id="floating_standard"
