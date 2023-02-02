@@ -17,6 +17,8 @@ const memberControllers = require("./controllers/memberControllers");
 // Add all routes
 
 // PUBLIC ROUTES
+router.post("/api/club", clubControllers.createNewClub);
+
 router.post("/register", hashPassword, userControllers.createUser);
 router.post(
   "/login",
@@ -36,7 +38,6 @@ router.delete("/api/user/:id", userControllers.deleteUser);
 // CLUB ROUTES
 router.get("/api/clubs", clubControllers.getAllClubs);
 router.get("/api/club/:id", clubControllers.getClubById);
-router.post("/api/club", clubControllers.createNewClub);
 router.put("/api/club/:id", clubControllers.editClub);
 router.delete("/api/club/:id", clubControllers.deleteClub);
 

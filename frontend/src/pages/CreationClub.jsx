@@ -2,11 +2,11 @@ import { useState } from "react";
 import Lottie from "react-lottie";
 import { useNavigate } from "react-router-dom";
 import { toast, Toaster } from "react-hot-toast";
-import animationData from "../lotties/register.json";
+import animationData from "../lotties/create.json";
 
 const { VITE_BACKEND_URL } = import.meta.env;
 
-function Register() {
+function CreationClub() {
   const defaultOptions = {
     loop: true,
     autoplay: true,
@@ -16,77 +16,74 @@ function Register() {
     },
   };
   // we create states to save the value of the input
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastname] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [sport, setSport] = useState("");
+  const [trainer, setTrainer] = useState("");
 
   /* registerInformations will save all the data of the user  */
   const [registerInformations, setRegisterInformations] = useState({
-    firstname: "",
-    lastname: "",
-    email: "",
-    password: "",
+    name: "",
+    description: "",
+    sport: "",
+    trainer: "",
   });
   console.warn(registerInformations);
 
   const navigate = useNavigate();
 
   const notifySuccess = () => {
-    toast(`Félicitations votre compte est créé !`, {
-      icon: "🎉",
+    toast(`Le club a bien été créé !`, {
+      icon: "👍🏽",
     });
   };
 
   const notifyError = () => {
-    toast(
-      "Les informations transmises ne vous permettent pas de créer un compte",
-      {
-        icon: "🚫",
-      }
-    );
+    toast("Erreur dans la création du club", {
+      icon: "😕",
+    });
   };
 
   // we create functions to handle the change of the input and the submit of the form
-  const handleChangeFirstname = (e) => {
-    setFirstname(e.target.value);
+  const handleChangeName = (e) => {
+    setName(e.target.value);
     setRegisterInformations({
       ...registerInformations,
-      firstname: e.target.value,
+      name: e.target.value,
     });
   };
 
-  const handleChangeLastname = (e) => {
-    setLastname(e.target.value);
+  const handleChangeDescription = (e) => {
+    setDescription(e.target.value);
     setRegisterInformations({
       ...registerInformations,
-      lastname: e.target.value,
+      description: e.target.value,
     });
   };
 
-  const handleChangeEmail = (e) => {
-    setEmail(e.target.value);
+  const handleChangeSport = (e) => {
+    setSport(e.target.value);
     setRegisterInformations({
       ...registerInformations,
-      email: e.target.value,
+      sport: e.target.value,
     });
   };
 
-  const handleChangePassword = (e) => {
-    setPassword(e.target.value);
+  const handleChangeTrainer = (e) => {
+    setTrainer(e.target.value);
     setRegisterInformations({
       ...registerInformations,
-      password: e.target.value,
+      trainer: e.target.value,
     });
   };
 
   const submitRegisterInformations = (e) => {
     /* if one of the value of the object registerInformations is null, return a message */
     if (
-      registerInformations.firstname === "" ||
-      registerInformations.lastname === "" ||
-      registerInformations.email === "" ||
-      registerInformations.password === ""
+      registerInformations.name === "" ||
+      registerInformations.description === "" ||
+      registerInformations.sport === "" ||
+      registerInformations.trainer === ""
     )
       return;
 
@@ -104,7 +101,7 @@ function Register() {
 
     e.preventDefault();
 
-    fetch(`${VITE_BACKEND_URL}/register`, requestOptions)
+    fetch(`${VITE_BACKEND_URL}/api/club`, requestOptions)
       .then((response) => {
         if (response.status !== 201) {
           notifyError();
@@ -116,7 +113,7 @@ function Register() {
         notifySuccess(registerInformations.firstname);
 
         setTimeout(() => {
-          navigate("/");
+          navigate("/home");
         }, 1500);
       })
       .catch(console.error);
@@ -138,12 +135,12 @@ function Register() {
           <div className="flex flex-col justify-center w-9/12 md:w-1/3 pb-5">
             <img src="/src/assets/mail.png" alt="mailPicture" width={30} />
             <input
-              type="firstname"
+              type="nomDuClub"
               id="floating_standard"
               className="block text-sm text-black bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-black dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-              value={firstname}
-              onChange={handleChangeFirstname}
-              placeholder="Prénom"
+              value={name}
+              onChange={handleChangeName}
+              placeholder="Nom du club"
             />
             <label
               htmlFor="floating_standard"
@@ -154,13 +151,13 @@ function Register() {
           </div>
           <div className="flex flex-col justify-center w-9/12 md:w-1/3">
             <img src="/src/assets/password.png" alt="mailPicture" width={30} />
-            <input
-              type="lastname"
+            <textarea
+              type="textarea"
               id="floating_standard"
               className="block text-sm text-black bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-black dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-              value={lastname}
-              onChange={handleChangeLastname}
-              placeholder="Nom"
+              value={description}
+              onChange={handleChangeDescription}
+              placeholder="Description du club"
             />
             <label
               htmlFor="floating_standard"
@@ -172,12 +169,12 @@ function Register() {
           <div className="flex flex-col justify-center w-9/12 md:w-1/3 pb-5">
             <img src="/src/assets/mail.png" alt="mailPicture" width={30} />
             <input
-              type="email"
+              type="sport"
               id="floating_standard"
               className="block text-sm text-black bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-black dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-              value={email}
-              onChange={handleChangeEmail}
-              placeholder="E-mail"
+              value={sport}
+              onChange={handleChangeSport}
+              placeholder="Sport ou activité pratiqué(e)"
             />
             <label
               htmlFor="floating_standard"
@@ -189,12 +186,12 @@ function Register() {
           <div className="flex flex-col justify-center w-9/12 md:w-1/3">
             <img src="/src/assets/password.png" alt="mailPicture" width={30} />
             <input
-              type="password"
+              type="trainer"
               id="floating_standard"
               className="block text-sm text-black bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-black dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-              value={password}
-              onChange={handleChangePassword}
-              placeholder="Mot de passe"
+              value={trainer}
+              onChange={handleChangeTrainer}
+              placeholder="Nom du coach / reponsable du club"
             />
             <label
               htmlFor="floating_standard"
@@ -207,11 +204,11 @@ function Register() {
             type="submit"
             className="text-white bg-mainBlue hover:bg-mainBlue  focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-10 py-2.5 mr-2 mb-2 dark:bg-mainBlue dark:hover:bg-mainBlue focus:outline-none dark:focus:ring-mainBlue"
           >
-            Créer mon compte
+            Créer mon club
           </button>
         </form>
       </div>
     </>
   );
 }
-export default Register;
+export default CreationClub;
