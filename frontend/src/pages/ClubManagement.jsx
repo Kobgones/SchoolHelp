@@ -42,9 +42,35 @@ function ClubManagement() {
   }, []);
 
   const handleDeleteTutorial = async () => {
-    /* delete all steppers */
+    await fetch(`${VITE_BACKEND_URL}/api/clubmembers/${id}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.text())
+      .then((data) => {
+        if (data) {
+          fetch(`${VITE_BACKEND_URL}/api/members/${id}`, {
+            method: "DELETE",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          })
+            .then((response) => response.text())
+            .then((data2) => {
+              if (data2.error) {
+                toast.error(data.error);
+              }
+            });
+        } else {
+          toast.error(data.error);
+        }
+      });
 
-    fetch(`${VITE_BACKEND_URL}/api/club/${id}`, {
+    await fetch(`${VITE_BACKEND_URL}/api/club/${id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,

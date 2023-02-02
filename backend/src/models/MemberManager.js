@@ -24,6 +24,13 @@ class MemberManager extends AbstractManager {
       [id]
     );
   }
+
+  deleteAllMembersFromAClub(id) {
+    return this.connection.query(
+      `delete from ${this.table} where club_id = ?`,
+      [id]
+    );
+  }
 }
 
 module.exports = MemberManager;
