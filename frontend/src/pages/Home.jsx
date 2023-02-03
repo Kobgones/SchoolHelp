@@ -1,36 +1,71 @@
-import Counter from "../components/Counter";
-import logo from "../assets/logo.svg";
+import React, { useEffect, useState, useContext } from "react";
+import CurrentUserContext from "../contexts/userContext";
 
-export default function Home() {
+const { VITE_BACKEND_URL } = import.meta.env;
+
+function Home() {
+  const { currentUser, token } = useContext(CurrentUserContext);
+
+  // create states to stock the data from the backend
+  const [clubs, setClubs] = useState([]);
+
+  // fetch all my club data from the backend with a fetch request to /api/clubs
+  const requestOptions = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  useEffect(() => {
+    const getClubs = () => {
+      fetch(`${VITE_BACKEND_URL}/api/clubs`, requestOptions)
+        .then((response) => response.json())
+        .then((data) => {
+          setClubs(data);
+          console.warn(data);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    };
+    getClubs();
+  }, []);
+
   return (
-    <header className="App-header">
-      <img src={logo} className="App-logo" alt="logo" />
-      <p>Hello Vite + React !</p>
-
-      <Counter />
-
-      <p>
-        Edit <code>App.jsx</code> and save to test HMR updates.
-      </p>
-      <p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        {" | "}
-        <a
-          className="App-link"
-          href="https://vitejs.dev/guide/features.html"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Vite Docs
-        </a>
-      </p>
-    </header>
+    <div className="flex flex-col justify-center items-center">
+      <div>
+        <h1 className="text-mainBlue font-bold text-xl py-4">
+          Bonjour {currentUser.firstname} ! 😁
+        </h1>
+      </div>
+      <div>
+        <div className="md:grid md:grid-cols-2 md:gap-2 flex flex-col justify-center items-center w-full h-full">
+          {clubs.map((club) => (
+            <div
+              key={club.id}
+              className="flex flex-col box justify-center items-center border-10 shadow-lg  w-2/3 py-10 my-10 hover:scale-110 hover:duration-100"
+            >
+              <h3 className="text-mainBlue pb-10 underline font-serif">
+                {club.name}
+              </h3>
+              <h3 className="text-mainBlue pb-10">{club.sport}</h3>
+              <img
+                src={club.picture}
+                alt={club.name}
+                height={200}
+                width={200}
+              />
+              <h4 className="text-mainBlue pb-10">
+                Coach / Responsable:{" "}
+                <span className="font-bold">{club.trainer}</span>
+              </h4>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 }
+
+export default Home;
