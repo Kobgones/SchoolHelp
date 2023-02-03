@@ -8,6 +8,7 @@ import Error from "../pages/Error";
 import ClubManagement from "../pages/ClubManagement";
 import UserManagement from "../pages/UserManagement";
 import Profil from "../pages/Profil";
+import ClubPresentation from "../pages/ClubPresentation";
 
 function AllRoutes() {
   return (
@@ -19,6 +20,7 @@ function AllRoutes() {
       <Route path="/clubmanagement" element={<ClubManagement />} />
       <Route path="/usermanagement" element={<UserManagement />} />
       <Route path="/profil" element={<Profil />} />
+      <Route path="/clubpresentation/:id" element={<ClubPresentation />} />
       <Route path="*" element={<Error />} />
     </Routes>
   );

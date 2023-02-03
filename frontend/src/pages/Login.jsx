@@ -139,11 +139,11 @@ export default function Home() {
             </div>
             <button
               type="submit"
-              className="text-white bg-mainBlue hover:bg-mainBlue  focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-10 py-2.5 mr-2 mb-2 dark:bg-mainBlue dark:hover:bg-mainBlue focus:outline-none dark:focus:ring-mainBlue"
+              className="text-white mt-10 md:mt-0 bg-mainBlue hover:bg-mainBlue focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-10 py-2.5 mr-2 mb-2 dark:bg-mainBlue dark:hover:bg-mainBlue focus:outline-none dark:focus:ring-mainBlue"
             >
               Connexion
             </button>
-            <div className="mt-20">
+            <div className="md:mt-6 mt-20">
               <span className="block text-sm text-center underline text-gray-500 hover:text-black">
                 <Link to="/register">
                   {" "}

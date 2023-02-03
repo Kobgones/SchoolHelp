@@ -85,6 +85,7 @@ function Profil() {
         })
       );
   };
+
   return (
     <div className=" relative flex flex-col my-6">
       <Toaster position="top-center" reverseOrder />

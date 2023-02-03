@@ -40,24 +40,25 @@ function Home() {
         </h1>
       </div>
       <div>
-        <div className="md:grid md:grid-cols-2 md:gap-2 flex flex-col justify-center items-center w-full h-full">
+        <div className="md:grid h-full md:grid-cols-4 md:gap-2 flex flex-col justify-center items-center w-full">
           {clubs.map((club) => (
             <div
               key={club.id}
-              className="flex flex-col box justify-center items-center border-10 shadow-lg  w-2/3 py-10 my-10 hover:scale-110 hover:duration-100"
+              className="bg-white h-fit flex justify-center border rounded-2xl shadow-lg m-3 p-3 flex-col hover:scale-110 hover:duration-100 hover:bg-[#003da5] hover:text-white"
             >
-              <h3 className="text-mainBlue pb-10 underline font-serif">
+              <h3 className="text-mainBlue pb-10 underline font-serif text-xl">
                 {club.name}
               </h3>
               <h3 className="text-mainBlue pb-10">{club.sport}</h3>
               <img
                 src={club.picture}
                 alt={club.name}
-                height={200}
-                width={200}
+                height={100}
+                width={100}
+                className="rounded-full flex justify-center items-center"
               />
               <h4 className="text-mainBlue pb-10">
-                Coach / Responsable:{" "}
+                Coach / Responsable: <br />
                 <span className="font-bold">{club.trainer}</span>
               </h4>
             </div>
