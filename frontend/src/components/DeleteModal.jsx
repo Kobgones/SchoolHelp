@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 
-function DeleteModalClub({
+function DeleteModal({
   confirmDeleteModale,
   setConfirmDeleteModale,
   handleDeleteTutorial,
@@ -83,4 +83,4 @@ function DeleteModalClub({
   );
 }
 
-export default DeleteModalClub;
+export default DeleteModal;

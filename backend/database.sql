@@ -5,7 +5,7 @@ DROP TABLE IF EXISTS `club`;
 CREATE TABLE `club` (
   `id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
-  `picture` text,
+  `picture` varchar(300) NOT NULL DEFAULT "src/assets/fish.png",
   `description` text NOT NULL,
   `sport` varchar(255),
   `trainer` varchar(255)

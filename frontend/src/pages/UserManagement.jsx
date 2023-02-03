@@ -7,42 +7,44 @@ import trash from "../assets/trash.svg";
 
 const { VITE_BACKEND_URL } = import.meta.env;
 
-function ClubManagement() {
-  const notify = () => toast.success("Le club a bien été supprimé");
+function UserManagement() {
+  const notify = () => toast.success("L'utilisateur a bien été supprimé");
 
   const { token } = useContext(CurrentUserContext);
 
-  /* Fetch all the clubs */
-  const [clubs, setClubs] = useState([]);
+  /* Fetch all the users */
+  const [users, setUsers] = useState([]);
 
   const [confirmDeleteModale, setConfirmDeleteModale] = useState(false);
   const [id, setId] = useState();
 
-  const [search, setSearch] = useState("");
-  const normalizeSearch = search
+  const [searchUser, setSearchUser] = useState("");
+  const normalizeSearch = searchUser
     ?.toLowerCase()
     .normalize("NFD")
     .replace(/[\u0300-\u036f+.]/g, "");
 
-  const filtredClubs = clubs?.filter((club) =>
-    club.name
+  const filtredUsers = users?.filter((user) =>
+    user.firstname
       .toLowerCase()
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "")
       .includes(normalizeSearch)
   );
 
-  const fetchClubs = () => {
-    fetch(`${VITE_BACKEND_URL}/api/clubs`)
+  const fetchUsers = () => {
+    fetch(`${VITE_BACKEND_URL}/api/users`)
       .then((response) => response.json())
-      .then((data) => setClubs(data));
+      .then((data) => setUsers(data));
+    console.warn(users);
   };
+
   useEffect(() => {
-    fetchClubs();
+    fetchUsers();
   }, []);
 
   const handleDeleteTutorial = async () => {
-    await fetch(`${VITE_BACKEND_URL}/api/clubmembers/${id}`, {
+    await fetch(`${VITE_BACKEND_URL}/api/memberclubs/${id}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -52,7 +54,7 @@ function ClubManagement() {
       .then((response) => response.text())
       .then((data) => {
         if (data) {
-          fetch(`${VITE_BACKEND_URL}/api/members/${id}`, {
+          fetch(`${VITE_BACKEND_URL}/api/clubmembers/${id}`, {
             method: "DELETE",
             headers: {
               Authorization: `Bearer ${token}`,
@@ -70,7 +72,7 @@ function ClubManagement() {
         }
       });
 
-    await fetch(`${VITE_BACKEND_URL}/api/club/${id}`, {
+    await fetch(`${VITE_BACKEND_URL}/api/user/${id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -85,7 +87,7 @@ function ClubManagement() {
       });
 
     setConfirmDeleteModale(false);
-    fetchClubs();
+    fetchUsers();
     setTimeout(() => {
       notify();
     }, 500);
@@ -99,15 +101,15 @@ function ClubManagement() {
       </div>
       <h2 className="m-6 font-bold text-main-blue text-xl md:text-3xl  text-center ">
         {" "}
-        Gestion des clubs
+        Gestion des utilisateurs
       </h2>
       <form className="w-full flex flex-col justify-center items-center ">
         <input
           type="text"
           id="tutoriels"
           name="tutoriels"
-          onChange={(e) => setSearch(e.target.value)}
-          placeholder="Recherchez un club"
+          onChange={(e) => setSearchUser(e.target.value)}
+          placeholder="Recherchez un utilisateur"
           className=" border-gray-400 rounded-lg mb-5 p-4 w-4/6 md:w-2/6 h-10  bg-gray-200"
         />
 
@@ -115,7 +117,9 @@ function ClubManagement() {
           <div className="flex flex-col justify-center bg-gray-200 py-3 w-full h-full">
             <div className="w-5/6  mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
               <header className="px-5 py-4 border-b border-gray-100">
-                <h2 className="text-2xl font-bold text-main-blue">Clubs</h2>
+                <h2 className="text-2xl font-bold text-main-blue">
+                  Utilisateurs
+                </h2>
               </header>
               <div className="p-3">
                 <div className="overflow-x-auto">
@@ -123,37 +127,37 @@ function ClubManagement() {
                     <thead className="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
                       <tr>
                         <th className="p-2 whitespace-nowrap">
-                          <div className="font-semibold text-left">Titre</div>
+                          <div className="font-semibold text-left">Prénom</div>
+                        </th>
+                        <th className="p-2 whitespace-nowrap">
+                          <div className="font-semibold text-center">Nom</div>
                         </th>
                         <th className="p-2 whitespace-nowrap">
                           <div className="font-semibold text-center">
-                            Gestion
+                            Supprimer
                           </div>
-                        </th>
-                        <th className="p-2 whitespace-nowrap">
-                          <div className="font-semibold text-center">Sport</div>
                         </th>
                       </tr>
                     </thead>
                     <tbody className="text-sm divide-y divide-gray-100">
-                      {filtredClubs.length === 0 ? (
+                      {filtredUsers.length === 0 ? (
                         <th className="mx-0 text-1xl">
                           Aucun tutoriel n'a été trouvé
                         </th>
                       ) : (
-                        filtredClubs?.map((club) => (
-                          <tr key={club.id} className="hover:bg-gray-100">
+                        filtredUsers?.map((user) => (
+                          <tr key={user.id} className="hover:bg-gray-100">
                             <td className="p-2 whitespace-nowrap">
                               <div className="flex items-center">
                                 <div className="font-medium text-gray-800">
-                                  {club.name}
+                                  {user.firstname}
                                 </div>
                               </div>
                             </td>
                             <td className="p-2 whitespace-nowrap">
-                              <div className="flex items-center">
+                              <div className="flex justify-center items-center">
                                 <div className="font-medium text-gray-800">
-                                  {club.sport}
+                                  {user.lastname}
                                 </div>
                               </div>
                             </td>
@@ -162,7 +166,7 @@ function ClubManagement() {
                                 {" "}
                                 <button
                                   onClick={() => {
-                                    setId(club.id);
+                                    setId(user.id);
                                     setConfirmDeleteModale(!false);
                                   }}
                                   type="button"
@@ -193,4 +197,4 @@ function ClubManagement() {
   );
 }
 
-export default ClubManagement;
+export default UserManagement;

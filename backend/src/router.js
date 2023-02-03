@@ -39,5 +39,6 @@ router.get("/api/members", memberControllers.getAllMembers);
 router.get("/api/clubmembers/:id", memberControllers.getAllMembersFromClub);
 router.get("/api/memberclubs/:id", memberControllers.getAllClubsForMember);
 router.delete("/api/members/:id", memberControllers.deleteByClub);
+router.delete("/api/clubmembers/:id", memberControllers.deleteByMember);
 
 module.exports = router;

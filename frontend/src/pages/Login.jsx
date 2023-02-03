@@ -65,8 +65,6 @@ export default function Home() {
       body,
       headers: myHeaders,
     })
-      /* then I get the response to json. If response == 401 console log error else .then result
-       */
       // eslint-disable-next-line consistent-return
       .then((response) => {
         if (response.status !== 401) {

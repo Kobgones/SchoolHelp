@@ -39,7 +39,7 @@ const createUser = (req, res) => {
 
 const editUser = (req, res) => {
   const user = req.body;
-  user.id = req.params.id;
+  user.id = parseInt(req.params.id, 10);
   models.user
     .editUser(user)
     .then(([result]) => {
