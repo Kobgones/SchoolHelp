@@ -44,11 +44,11 @@ function DeleteModal({
                         className="text-lg font-medium leading-6 text-gray-900"
                         id="modal-title"
                       >
-                        Supprimer le tutoriel
+                        Supprimer la donnée
                       </h3>
                       <div className="mt-2">
                         <p className="text-sm text-gray-500">
-                          Êtes vous certain de vouloir supprimer ce tutoriel ?
+                          Êtes vous certain de vouloir supprimer cette entrée ?
                           <br />
                           Toutes les données seront définitivement supprimées.
                           <br />
