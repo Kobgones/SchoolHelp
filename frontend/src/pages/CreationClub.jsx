@@ -8,6 +8,8 @@ import animationData from "../lotties/create.json";
 const { VITE_BACKEND_URL } = import.meta.env;
 
 function CreationClub() {
+  const navigate = useNavigate();
+
   const defaultOptions = {
     loop: true,
     autoplay: true,
@@ -30,8 +32,6 @@ function CreationClub() {
     trainer: "",
   });
   console.warn(registerInformations);
-
-  const navigate = useNavigate();
 
   const notifySuccess = () => {
     toast(`Le club a bien été créé !`, {

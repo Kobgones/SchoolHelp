@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react";
 
 function getStorageValue(key, defaultValue) {
-  /* We get the value in the localstorage
-  then we convert it and send back at the defautl value */
-
   const saved = localStorage.getItem(key);
   const initial = JSON.parse(saved);
   return initial || defaultValue;

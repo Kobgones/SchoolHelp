@@ -74,7 +74,6 @@ export default function Home() {
         setPassword("");
       })
       .then((result) => {
-        console.warn(result);
         if (result.token) {
           setCurrentUser(result.user);
           setToken(result.token);
@@ -86,14 +85,16 @@ export default function Home() {
           notifyError();
         }
       })
-      .catch((error) => console.warn(error));
+      .catch((error) => {
+        throw new Error(error);
+      });
   };
 
   return (
     <>
       <Toaster position="top-center" reverseOrder />
       <div className="flex flex-col justify-center items-center my-10">
-        <div className="flex flex-col justify-center items-center rounded-full border-[1px] border-mainBlue shadow-lg overflow-hidden">
+        <div className="flex flex-col justify-center items-center rounded-full border-[1px] border-mainBlue shadow-lg">
           <Lottie options={defaultOptions} height={300} width={300} />
         </div>
         <div className="">
@@ -139,18 +140,19 @@ export default function Home() {
             </div>
             <button
               type="submit"
-              className="text-white mt-10 md:mt-0 bg-mainBlue hover:bg-mainBlue focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-10 py-2.5 mr-2 mb-2 dark:bg-mainBlue dark:hover:bg-mainBlue focus:outline-none dark:focus:ring-mainBlue"
+              className="text-white underline mt-10 md:mt-0 bg-mainBlue hover:bg-mainBlue focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-10 py-2.5 mr-2 mb-2 dark:bg-mainBlue dark:hover:bg-mainBlue focus:outline-none dark:focus:ring-mainBlue"
             >
               Connexion
             </button>
-            <div className="md:mt-6 mt-20">
-              <span className="block text-sm text-center underline text-gray-500 hover:text-black">
-                <Link to="/register">
-                  {" "}
-                  Pas encore de compte ? <br />
-                  Je le crée de suite !
-                </Link>
-              </span>
+            <div className="md:mt-6">
+              <button
+                type="button"
+                className="text-white underline mt-10 md:mt-0 bg-mainBlue hover:bg-mainBlue focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-10 py-2.5 mr-2 mb-2 dark:bg-mainBlue dark:hover:bg-mainBlue focus:outline-none dark:focus:ring-mainBlue"
+              >
+                <span>
+                  <Link to="/register"> Je crée mon compte</Link>
+                </span>
+              </button>
             </div>
           </form>
         </div>

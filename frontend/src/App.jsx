@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Loader from "./components/Loader";
 import Navbar from "./components/Navbar";
 import AllRoutes from "./components/AllRoutes";
@@ -9,23 +9,25 @@ import "./index.css";
 import { CurrentUserProvider } from "./contexts/userContext";
 
 function App() {
-  const [loader, setLoader] = useState(true);
+  const [loading, setLoading] = useState(true);
+  const location = useLocation();
 
   useEffect(() => {
     setTimeout(() => {
-      setLoader(false);
-    }, 1800);
+      setLoading(false);
+    }, 1500);
   }, []);
-  return loader ? (
-    <Loader />
-  ) : (
+
+  if (loading && location.pathname === "/") {
+    return <Loader />;
+  }
+
+  return (
     <div className="App">
-      <Router>
-        <CurrentUserProvider>
-          <Navbar />
-          <AllRoutes />
-        </CurrentUserProvider>
-      </Router>
+      <CurrentUserProvider>
+        <Navbar />
+        <AllRoutes />
+      </CurrentUserProvider>
     </div>
   );
 }

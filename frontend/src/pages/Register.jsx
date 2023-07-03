@@ -29,7 +29,6 @@ function Register() {
     email: "",
     password: "",
   });
-  console.warn(registerInformations);
 
   const navigate = useNavigate();
 
@@ -112,8 +111,7 @@ function Register() {
         }
         response.text();
       })
-      .then((response) => {
-        console.warn(response);
+      .then(() => {
         notifySuccess(registerInformations.firstname);
 
         setTimeout(() => {
@@ -127,17 +125,17 @@ function Register() {
     <>
       <Toaster position="top-center" reverseOrder />
       <PreviousButton />
-      <div className="flex flex-col justify-center items-center h-screen">
-        <div className="pb-10">
+      <div className="flex flex-col justify-center items-center h-screen -mt-16">
+        <div className="">
           <div className="flex flex-col justify-center items-center rounded-full border-2 border-mainBlue bg-mainBlue overflow-hidden">
-            <Lottie options={defaultOptions} height={300} width={300} />
+            <Lottie options={defaultOptions} height={200} width={200} />
           </div>
         </div>
         <form
           onSubmit={submitRegisterInformations}
           className="w-screen flex flex-col justify-center items-center"
         >
-          <div className="flex flex-col justify-center w-9/12 md:w-1/3 pb-5">
+          <div className="flex flex-col justify-center w-9/12 md:w-1/3">
             <input
               type="firstname"
               id="floating_standard"
@@ -145,6 +143,7 @@ function Register() {
               value={firstname}
               onChange={handleChangeFirstname}
               placeholder="Prénom"
+              required
             />
             <label
               htmlFor="floating_standard"
@@ -161,6 +160,7 @@ function Register() {
               value={lastname}
               onChange={handleChangeLastname}
               placeholder="Nom"
+              required
             />
             <label
               htmlFor="floating_standard"
@@ -169,7 +169,7 @@ function Register() {
               <br />
             </label>
           </div>
-          <div className="flex flex-col justify-center w-9/12 md:w-1/3 pb-5">
+          <div className="flex flex-col justify-center w-9/12 md:w-1/3">
             <input
               type="email"
               id="floating_standard"
@@ -177,6 +177,7 @@ function Register() {
               value={email}
               onChange={handleChangeEmail}
               placeholder="E-mail"
+              required
             />
             <label
               htmlFor="floating_standard"
@@ -193,6 +194,7 @@ function Register() {
               value={password}
               onChange={handleChangePassword}
               placeholder="Mot de passe"
+              required
             />
             <label
               htmlFor="floating_standard"
@@ -203,7 +205,7 @@ function Register() {
           </div>
           <button
             type="submit"
-            className="text-white bg-mainBlue hover:bg-mainBlue  focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-10 py-2.5 mr-2 mb-2 dark:bg-mainBlue dark:hover:bg-mainBlue focus:outline-none dark:focus:ring-mainBlue"
+            className="text-white bg-mainBlue hover:bg-mainBlue focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-10 py-2.5 mr-2 dark:bg-mainBlue dark:hover:bg-mainBlue focus:outline-none dark:focus:ring-mainBlue"
           >
             Créer mon compte
           </button>

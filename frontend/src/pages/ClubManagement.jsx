@@ -37,6 +37,7 @@ function ClubManagement() {
       .then((response) => response.json())
       .then((data) => setClubs(data));
   };
+
   useEffect(() => {
     fetchClubs();
   }, []);

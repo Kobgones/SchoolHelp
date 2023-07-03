@@ -23,7 +23,6 @@ function Home() {
         .then((response) => response.json())
         .then((data) => {
           setClubs(data);
-          console.warn(data);
         })
         .catch((error) => {
           console.error("Error:", error);
@@ -44,7 +43,7 @@ function Home() {
           {clubs.map((club) => (
             <div
               key={club.id}
-              className="bg-white h-fit flex justify-center border rounded-2xl shadow-lg m-3 p-3 flex-col hover:scale-110 hover:duration-100 hover:bg-[#003da5] hover:text-white"
+              className="bg-white h-96 flex justify-center items-center border rounded-2xl shadow-lg m-3 p-3 flex-col hover:scale-110 hover:duration-100 hover:bg-[#c0c0c0]"
             >
               <h3 className="text-mainBlue pb-10 underline font-serif text-xl">
                 {club.name}
@@ -53,9 +52,7 @@ function Home() {
               <img
                 src={club.picture}
                 alt={club.name}
-                height={100}
-                width={100}
-                className="rounded-full flex justify-center items-center"
+                className="rounded-full flex justify-center items-center w-28 h-fit "
               />
               <h4 className="text-mainBlue pb-10">
                 Coach / Responsable: <br />
