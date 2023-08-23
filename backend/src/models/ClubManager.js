@@ -11,14 +11,14 @@ class ClubManager extends AbstractManager {
 
   findClubById(id) {
     return this.connection.query(`select * from ${this.table} where id = ?`, [
-      id.id,
+      id,
     ]);
   }
 
   createNewClub(club) {
     return this.connection.query(
-      `insert into ${this.table} (name, description, sport, trainer) values (?, ?, ?, ?)`,
-      [club.name, club.description, club.sport, club.trainer]
+      `insert into ${this.table} (name, description, sport, trainer, picture) values (?, ?, ?, ?, ?)`,
+      [club.name, club.description, club.sport, club.trainer, club.picture]
     );
   }
 

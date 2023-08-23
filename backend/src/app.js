@@ -2,9 +2,20 @@ const express = require("express");
 const fs = require("fs");
 const path = require("path");
 const cors = require("cors");
+const rateLimit = require("express-rate-limit");
 const router = require("./router");
 
 const app = express();
+
+// create a limiter object to limit repeated requests
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
+  message: "Too many requests from this IP, please try again later",
+});
+
+// apply to all requests
+app.use(limiter);
 
 // use some application-level middlewares
 app.use(
@@ -14,6 +25,7 @@ app.use(
   })
 );
 
+// Parse JSON bodies (as sent by API clients)
 app.use(express.json());
 
 // Serve the public folder for public resources

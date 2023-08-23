@@ -39,7 +39,6 @@ const verifyPassword = (req, res) => {
           algorithm: "HS512",
           expiresIn: "12h",
         });
-
         delete req.user.hashedPassword;
         res.send({ token, user: req.user });
       } else {
